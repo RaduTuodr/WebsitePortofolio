@@ -34,7 +34,7 @@ const Navbar = () => {
                     href={"/"} 
                     className="text-2xl md:text-5xl text-white font-semibold"
                     >
-                    LOGO
+                    Radu T.
                 </Link>
 
                 <div className="menu hidden md:block md:w-auto" id="navbar">

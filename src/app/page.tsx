@@ -1,7 +1,8 @@
 import Image from "next/image";
 import IntroSection from "../components/IntroSection";
 import Navbar from "../components/Navbar";
-import AboutMeSection from "../components/AboutMeSection"
+import AboutMeSection from "../components/AboutMeSection";
+import ProjectSection from "../components/ProjectSection";
 
 export default function Home() {
 
@@ -15,6 +16,8 @@ export default function Home() {
 			</div>
 
 			<AboutMeSection/>
+
+			<ProjectSection/>
 
 		</main>
 	)
