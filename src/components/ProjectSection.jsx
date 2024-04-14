@@ -41,13 +41,13 @@ const ProjectSection = () => {
     }, []);
 
     return (
-        <>
+        <section id="projects">
             <h2 className="text-center text-4xl font-bold text-white mt-4">
                 My projects
             </h2>
 
             {isLoading ? (
-                <LoadingSection/>                   // TODO: should add a loadingSection
+                <LoadingSection/>
             ) : fetchError ? (
                 <p>Error: {fetchError}</p>
             ) : (
@@ -63,7 +63,7 @@ const ProjectSection = () => {
                     ))}
                 </div>
             )}
-        </>
+        </section>
     );
 };
 
