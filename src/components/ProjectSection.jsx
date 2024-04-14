@@ -2,33 +2,41 @@
 
 import React, { useEffect, useState } from "react";
 import ProjectCard from "../components/ProjectCard";
-import supabase from '../config/supabaseClient'
+import LoadingSection from "../components/LoadingSection";
+import supabase from '../config/supabaseClient';
 
 const ProjectSection = () => {
     const [fetchError, setFetchError] = useState(null);
     const [projects, setProjects] = useState([]);
+    const [thumbnails, setThumbnails] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const fetchProjects = async () => {
             try {
-                const { data, error } = await supabase.from('projects').select();
-
-                if (error) {
-                    throw new Error("Couldn't fetch projects from Supabase");
+                const { data: projectsData, error: projectError } = await supabase.from('projects').select();
+                const { data: thumbnailsData, error: thumbnailError } = await supabase.storage.from('thumbnails');
+        
+                if (projectError) {
+                    throw new Error(projectError.message);
+                }
+                if (thumbnailError) {
+                    throw new Error(thumbnailError.message);
                 }
 
-                if (data) {
-                    setProjects(data);
-                    setFetchError(null);
-                }
+                console.log(thumbnailsData);
+    
+                setProjects(projectsData);
+                setThumbnails(thumbnailsData);
+                setFetchError(null);
+    
             } catch (error) {
                 setFetchError(error.message);
             } finally {
                 setIsLoading(false);
             }
         };
-
+    
         fetchProjects();
     }, []);
 
@@ -39,12 +47,12 @@ const ProjectSection = () => {
             </h2>
 
             {isLoading ? (
-                <p>Loading...</p>
+                <LoadingSection/>                   // TODO: should add a loadingSection
             ) : fetchError ? (
                 <p>Error: {fetchError}</p>
             ) : (
                 <div className="grid m-8 md:grid-cols-3 gap-8 md:gap-12">
-                    {projects.map((project) => (
+                    {projects.map((project, index) => (
                         <ProjectCard
                             key={project.id}
                             title={project.title}
