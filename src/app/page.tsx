@@ -4,6 +4,7 @@ import IntroSection from "../components/IntroSection";
 import Navbar from "../components/Navbar";
 import AboutMeSection from "../components/AboutMeSection";
 import ProjectSection from "../components/ProjectSection";
+import ContactSection from "../components/ContactSection";
 
 export default function Home() {
 
@@ -19,6 +20,8 @@ export default function Home() {
 			<AboutMeSection/>
 
 			<ProjectSection/>
+
+			<ContactSection/>
 
 		</main>
 	)
